@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자바스크립트 json데이터 출력하기</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <style>
+    .car_reverse{
+      border: none;
+      width: 1000px;
+      margin: 0 auto;
+      border-collapse : collapse;
+    }
+    .car_reverse caption{
+      color: #012c5f;
+      text-align: center;
+      font-size: 24px;
+      line-height: 50px;
+      font-weight:bold;
+    }
+    .car_reverse th{
+      background: #012c5f;
+      color: #fff;
+    }
+    .car_reverse td, .car_reverse th{
+      border:1px solid #ccc;
+      line-height:34px;
+      text-align:center;
+    }
+  </style>
+  <script>
+    $(function(){
+      $.getJSON('./data/test_drive.json', function(data){
+        let html = '<table class="car_reverse"><caption>시승신청조회</caption><tr><th>번호</th><th>이름</th><th>핸드폰번호</th><th>sms수신여부</th><th>이메일</th><th>지점</th><th>희망차종</th><th>보유차종</th><th>날짜</th></tr>';
+        for(key in data){
+          html += `<tr>`;
+          for(let i in data[key]){
+            html += `<td>${data[key][i]}</td>`
+          }
+          html += `</tr>`;
+        }
+        html += `</table>`;
+        $('.list').html(html);
+      });
+    });
+  </script>
+</head>
+<body>
+  <h2>자바스크립트 json데이터 출력하기</h2>
+  <p>닷홈 SQL데이터 베이스에 저장된 'test_drive'테이블의 자료를 'json'파일로 저장하여 자바스크립트로 출력해보기</p>
+  <div class="list"></div>
+</body>
+</html>
